@@ -36,7 +36,8 @@ async function uploadFileToPipedrive(filepath, fileName, personId) {
 
 async function findContactByPhone(phone) {
     try {
-        const response = await axios.get(`https://ligapi.pipedrive.com/api/v1/persons/search?term=${phone}&fields=phone&api_token=${PIPEDRIVE_API_TOKEN}`);
+        const secondPart = phone.slice(5)
+        const response = await axios.get(`https://ligapi.pipedrive.com/api/v1/persons/search?term=${secondPart}&fields=phone&api_token=${PIPEDRIVE_API_TOKEN}`);
         if (response.data.data.items.length > 0) {
             // Retorna o primeiro contato encontrado
             return response.data.data.items[0].item;
