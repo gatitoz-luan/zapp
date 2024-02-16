@@ -45,10 +45,12 @@ async function initializeWhatsAppClient(accountName) {
     });
 
     whatsappClient.on('message', async message => {
+        console.log(`mensagem de ${message.from} para ${message.to}`);
         await processarMensagem.recebe(message, accountName);
     });
 
     whatsappClient.on('message_ack', async (message, ack) => {
+        console.log(`mensagem de ${message.from} para ${message.to}`);
         await processarMensagem.envia(message, accountName, ack);
     });
 
