@@ -1,1 +1,6 @@
 node_modules/
+media/
+coverage/
+.wwebjs_auth/
+whatsapp-sessions.json
+.wwebjs_cache/
