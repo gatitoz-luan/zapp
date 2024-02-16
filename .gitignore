@@ -4,3 +4,15 @@ coverage/
 .wwebjs_auth/
 whatsapp-sessions.json
 .wwebjs_cache/
+
+# Ignorar tudo
+*
+
+# Permitir arquivos .gitignore e .md (README, LICENSE, etc.)
+!.gitignore
+!*.md
+
+# Permitir arquivos .js em qualquer lugar do repositório
+!*.js
+
+!*.json
