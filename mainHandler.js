@@ -58,7 +58,7 @@ async function recebe(message, accountName) {
         console.log(`[${accountName}] anexo de ${contactName} (${phoneNumber}): ${message.body}`);
         const filepath = await saveMedia(message);
         const fileUrl = await uploadFileToPipedrive(filepath, message.mimetype, person_id);
-        await createPipedriveActivity(person_id,contactName, phoneNumber, `anexo: ${fileUrl.name}`, accountName);
+        await createPipedriveActivity(person_id,contactName, phoneNumber, `anexo: ${fileUrl.name} "${message.body}"`, accountName);
         fs.unlinkSync(filepath); // Remove o arquivo temporário
     }
 }
@@ -72,7 +72,6 @@ async function envia(message, accountName,ack) {
         const phoneNumber = message.to.replace(/\D/g, '');
         console.log(`Mensagem enviada para ${phoneNumber} com status ack: ${ack}`);
         return;
-
     }
     if (ack==2){
         // Extrai apenas os números do identificador do remetente
@@ -98,7 +97,7 @@ async function envia(message, accountName,ack) {
             console.log(`[${accountName}] anexo de ${contactName} (${phoneNumber}): ${message.body}`);
             const filepath = await saveMedia(message);
             const fileUrl = await uploadFileToPipedrive(filepath, message.mimetype, person_id);
-            await createPipedriveActivity(person_id,contactName, phoneNumber, `anexo: ${fileUrl.name}`, accountName);
+            await createPipedriveActivity(person_id,contactName, phoneNumber, `anexo: ${fileUrl.name} "${message.body}"`, accountName);
             fs.unlinkSync(filepath); // Remove o arquivo temporário
         }
 }};

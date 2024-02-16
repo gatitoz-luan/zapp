@@ -51,7 +51,8 @@ async function initializeWhatsAppClient(accountName) {
 
     whatsappClient.on('message_ack', async (message, ack) => {
         console.log(`mensagem de ${message.from} para ${message.to}`);
-        await processarMensagem.envia(message, accountName, ack);
+        console.log(message)
+        //await processarMensagem.envia(message, accountName, ack);
     });
 
     await whatsappClient.initialize().catch(console.error);
