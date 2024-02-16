@@ -75,13 +75,19 @@ async function createPipedriveActivity(person_id, contactName, phone, content, a
 
 
 
-    // Obtém a data e o horário atuais
+    // Obtém a data e hora atuais
     const now = new Date();
-    // Formata a data e o horário. Exemplo: '2024-02-15 12:34:56'
-    // Ajuste o formato conforme necessário
-    const formattedDateTime = now.toISOString().replace('T', ' ').substring(10, 19);
 
-    const noteContent = `${formattedDateTime}->${contactName}: ${content}.`; 
+    // Ajusta para o fuso horário desejado (-3 horas)
+    // Nota: getTime retorna milissegundos, então você precisa converter 3 horas em milissegundos (3 * 60 * 60 * 1000)
+    const timezoneOffset = 3 * 60 * 60 * 1000;
+    const adjustedTime = new Date(now.getTime() - timezoneOffset);
+
+    // Formata a data e hora ajustada para o formato desejado
+    // A substring estava incorretamente começando do índice 10; ajustado para começar do início
+    const formattedDateTime = adjustedTime.toISOString().replace('T', ' ').substring(10, 19);
+
+    const noteContent = `${formattedDateTime} -> ${contactName}: ${content}.`;
     const activity = await findTodaysWhatsAppActivity(person_id);
     if (activity) {
         try {
